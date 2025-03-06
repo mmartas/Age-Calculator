@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Age calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="card">
+      <form action="" id="myForm">
+        <div class="oneCard">
+          <label for="date" class="askLabel">day</label><br>
+          <input type="number" min="1" max="31" placeholder="DD" class="inputs" name="date" id="inputDate">
+        </div>
+        
+        <div class="oneCard">
+          <label for="month" class="askLabel">month</label><br>
+          <input type="number" min="1" max="12" placeholder="MM"  class="inputs" name="month" id="inputMonth">
+        </div>
+        
+        <div class="oneCard">
+          <label for="year" class="askLabel">year</label><br>
+          <input type="number" min="1925" max="2025" placeholder="YYYY" class="inputs" name="year" id="inputYear">
+        </div>
+        
+
+        <input type="image" src="assets/images/icon-arrow.svg" id="sending">
+      </form>
+      <hr>
+
+      <div class="result">
+        <div class="empty-result">
+          <p id="yearEmptySpace">--</p>
+          <div id="placeYear">
+          </div>
+        </div>
+        <div class="labelYear">
+          <p>years</p>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="empty-result">
+          <p id="monthEmptySpace">--</p>
+          <div id="placeMonth">
+          </div>
+        </div>
+        <div class="labelMonth">
+          <p>months</p>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="empty-result">
+          <p id="dateEmptySpace">--</p>
+          <div id="placeDate">
+          </div>
+        </div>
+        <div class="labelDate">
+          <p>days</p>
+        </div>
+      </div>
+
+    </div>
+    
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
