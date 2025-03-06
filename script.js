@@ -19,6 +19,7 @@ myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
     event.preventDefault()
     
+    // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
     let noneValueDay = document.querySelector("#dateEmptySpace")
     noneValueDay.remove()
 
@@ -28,6 +29,7 @@ myForm.addEventListener("submit", function(event){
     let noneValueYear = document.querySelector("#yearEmptySpace")
     noneValueYear.remove()
 
+    // VÝPOČET ZBÝVAJÍCH LET, MĚSÍCŮ A DNŮ
     let searchedYear = actuallYear - Number(inputYear.value)
     let searchedMonth = actuallMonth - Number(inputMonth.value)
     let searchedDay = actuallDay - Number(inputDay.value)
@@ -46,14 +48,17 @@ myForm.addEventListener("submit", function(event){
         searchedDay = searchedDay + lastMonth.getDate();
     }
     
+    // NAPLNĚNÍ NOVÉHO ODSTAVCE HODNOTAMI
     newDayValue.textContent = searchedDay
     newMonthValue.textContent = searchedMonth
     newYearValue.textContent = searchedYear
 
+    // VYPSÁNÍ NOVÝCH HODNOT VE STRÁNCE
     let newDayValuePlace = document.querySelector("#placeDate").appendChild(newDayValue);
     let newMonthValuePlace = document.querySelector("#placeMonth").appendChild(newMonthValue);
     let newYearValuePlace = document.querySelector("#placeYear").appendChild(newYearValue)
 
+    // SMAZÁNÍ ČÍSEL Z FORMULÁŘE
     inputDay.value = ""
     inputMonth.value = ""
     inputYear.value = ""
