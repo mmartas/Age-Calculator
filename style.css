@@ -58,8 +58,13 @@ body, html {
     position: absolute;
     top: 100px;
     left: 500px;
+    transition: 0.5s ease;
 }
 
+#sending:hover {
+    background-color: var(--light-red);
+    transition: 0.5s ease;
+}
 .askLabel {
     text-transform: uppercase;
     letter-spacing: 1.5px;

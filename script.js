@@ -20,21 +20,27 @@ myForm.addEventListener("submit", function(event){
     event.preventDefault()
     
     // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
-    let noneValueDay = document.querySelector("#dateEmptySpace")
-    noneValueDay.remove()
-
-    let noneValueMonth = document.querySelector("#monthEmptySpace")
-    noneValueMonth.remove()
-
-    let noneValueYear = document.querySelector("#yearEmptySpace")
-    noneValueYear.remove()
-
+    if(document.getElementById("dateEmptySpace")) {
+        let noneValueDay = document.querySelector("#dateEmptySpace")
+        noneValueDay.remove()
+    }
+    
+    if(document.getElementById("monthEmptySpace")) {
+        let noneValueMonth = document.querySelector("#monthEmptySpace")
+        noneValueMonth.remove()
+    }
+    
+    if(document.getElementById("yearEmptySpace")) {
+        let noneValueYear = document.querySelector("#yearEmptySpace")
+        noneValueYear.remove()
+    }
+   
     // VÝPOČET ZBÝVAJÍCH LET, MĚSÍCŮ A DNŮ
     let searchedYear = actuallYear - Number(inputYear.value)
     let searchedMonth = actuallMonth - Number(inputMonth.value)
     let searchedDay = actuallDay - Number(inputDay.value)
 
-    if(Number(inputMonth.value) > actuallMonth) {
+    if(Number(inputMonth.value) >= actuallMonth) {
         searchedYear--;
     }
 
@@ -45,6 +51,7 @@ myForm.addEventListener("submit", function(event){
     if(searchedDay < 0) {
         searchedMonth--;
         let lastMonth = new Date(actuallYear, actuallMonth - 1, 0)
+        console.log(lastMonth)
         searchedDay = searchedDay + lastMonth.getDate();
     }
     
@@ -62,6 +69,4 @@ myForm.addEventListener("submit", function(event){
     inputDay.value = ""
     inputMonth.value = ""
     inputYear.value = ""
-
-    
 })
