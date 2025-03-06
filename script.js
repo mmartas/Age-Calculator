@@ -1,12 +1,12 @@
 let myForm = document.querySelector("#myForm")
 
-let myDay = document.querySelector("#inputDate")
-let myMonth = document.querySelector("#inputMonth")
+let inputDay = document.querySelector("#inputDate")
+let inputMonth = document.querySelector("#inputMonth")
+let inputYear = document.querySelector("#inputYear")
 
-
-let newDateParagraph = document.createElement("p")
-let newMonthParagraph = document.createElement("P")
-let newYearParagraph = document.createElement("p")
+let newDayValue = document.createElement("p")
+let newMonthValue = document.createElement("P")
+let newYearValue = document.createElement("p")
 
 let actuallFullDate = new Date();
 let actuallYear = actuallFullDate.getFullYear();
@@ -16,52 +16,47 @@ let actuallDay = actuallFullDate.getDate();
 
 
 myForm.addEventListener("submit", function(event){
+    // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
     event.preventDefault()
     
-    let carkyDate = document.querySelector("#dateEmptySpace")
-    carkyDate.remove()
-    let carkyMonth = document.querySelector("#monthEmptySpace")
-    carkyMonth.remove()
-    let carkyYear = document.querySelector("#yearEmptySpace")
-    carkyYear.remove()
+    let noneValueDay = document.querySelector("#dateEmptySpace")
+    noneValueDay.remove()
 
-    let myYear = document.querySelector("#inputYear")
+    let noneValueMonth = document.querySelector("#monthEmptySpace")
+    noneValueMonth.remove()
 
-    let searchingYear = actuallYear - Number(myYear.value)
-    let searchingMonth = actuallMonth - Number(myMonth.value)
-    let searchingDay = actuallDay - Number(myDay.value)
+    let noneValueYear = document.querySelector("#yearEmptySpace")
+    noneValueYear.remove()
 
-    if(Number(myMonth.value) > actuallMonth) {
-        searchingYear = searchingYear - 1
+    let searchedYear = actuallYear - Number(inputYear.value)
+    let searchedMonth = actuallMonth - Number(inputMonth.value)
+    let searchedDay = actuallDay - Number(inputDay.value)
+
+    if(Number(inputMonth.value) > actuallMonth) {
+        searchedYear--;
     }
 
-    if(searchingMonth < 0) {
-        // searchingYear = searchingYear - 1
-        searchingMonth = searchingMonth + 12
+    if(searchedMonth < 0) {
+        searchedMonth += 12;
     }
 
-    if(searchingDay < 0) {
-        searchingMonth = searchingMonth - 1
+    if(searchedDay < 0) {
+        searchedMonth--;
         let lastMonth = new Date(actuallYear, actuallMonth - 1, 0)
-        searchingDay = searchingDay + lastMonth.getDate();
+        searchedDay = searchedDay + lastMonth.getDate();
     }
+    
+    newDayValue.textContent = searchedDay
+    newMonthValue.textContent = searchedMonth
+    newYearValue.textContent = searchedYear
 
-    console.log(searchingYear + "roků")
-    console.log(searchingMonth + "měsíců")
-    console.log(searchingDay + "dní")
+    let newDayValuePlace = document.querySelector("#placeDate").appendChild(newDayValue);
+    let newMonthValuePlace = document.querySelector("#placeMonth").appendChild(newMonthValue);
+    let newYearValuePlace = document.querySelector("#placeYear").appendChild(newYearValue)
 
-
-    newDateParagraph.textContent = myDay.value
-    newMonthParagraph.textContent = myMonth.value
-    newYearParagraph.textContent = myYear.value
-
-    document.querySelector("#placeDate").appendChild(newDateParagraph)
-    document.querySelector("#placeMonth").appendChild(newMonthParagraph)
-    document.querySelector("#placeYear").appendChild(newYearParagraph)
-
-    myDay.value = ""
-    myMonth.value = ""
-    myYear.value = ""
+    inputDay.value = ""
+    inputMonth.value = ""
+    inputYear.value = ""
 
     
 })
