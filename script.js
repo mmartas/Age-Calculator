@@ -51,7 +51,6 @@ myForm.addEventListener("submit", function(event){
     if(searchedDay < 0) {
         searchedMonth--;
         let lastMonth = new Date(actuallYear, actuallMonth - 1, 0)
-        console.log(lastMonth)
         searchedDay = searchedDay + lastMonth.getDate();
     }
     
