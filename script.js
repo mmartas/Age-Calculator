@@ -64,7 +64,6 @@ myForm.addEventListener("submit", function(event){
         // MĚSÍCE
         if(searchedMonth < 0) {
             searchedMonth += 12;
-            searchedYear--;
         }
     
         // ROKY
