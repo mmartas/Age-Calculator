@@ -40,19 +40,25 @@ myForm.addEventListener("submit", function(event){
     let searchedMonth = actuallMonth - Number(inputMonth.value)
     let searchedDay = actuallDay - Number(inputDay.value)
 
-    if(Number(inputMonth.value) >= actuallMonth) {
+    // DNY
+    if(searchedDay < 0) {
+        let lastMonth = new Date(actuallYear, actuallMonth - 1, 0)
+        searchedDay += lastMonth.getDate();
+        searchedMonth--;
+    }
+
+    // MĚSÍCE
+    if(searchedMonth < 0) {
+        searchedMonth += 12;
         searchedYear--;
     }
 
-    if(searchedMonth < 0) {
-        searchedMonth += 12;
+    // ROKY
+    if(Number(inputMonth.value) > actuallMonth || (Number(inputMonth.value) === actuallMonth && Number(inputDay.value) > actuallDay)) {
+        searchedYear--;
     }
 
-    if(searchedDay < 0) {
-        searchedMonth--;
-        let lastMonth = new Date(actuallYear, actuallMonth - 1, 0)
-        searchedDay = searchedDay + lastMonth.getDate();
-    }
+    
     
     // NAPLNĚNÍ NOVÉHO ODSTAVCE HODNOTAMI
     newDayValue.textContent = searchedDay
