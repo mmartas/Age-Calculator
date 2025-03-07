@@ -13,7 +13,9 @@ let actuallYear = actuallFullDate.getFullYear();
 let actuallMonth = actuallFullDate.getMonth() + 1;
 let actuallDay = actuallFullDate.getDate();
 
+//let inputDateErrorPlace = document.querySelector("#inputDateErrorPlace")
 
+//let newDateError = document.createElement("p")
 
 myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
@@ -21,6 +23,9 @@ myForm.addEventListener("submit", function(event){
 
     if([4, 6, 9, 11].includes(Number(inputMonth.value)) && Number(inputDay.value > 30)) {
         alert("Zadejte prosím platné datum.")
+        // inputDay.classList.add("error-border");
+        // newDateError.textContent = "Enter a valid date"
+        // inputDateErrorPlace.appendChild(newDateError)
     } else if ([2].includes(Number(inputMonth.value)) && Number(inputDay.value > 29)) {
         alert("Zadejte prosím platné datum.")
     } else {
