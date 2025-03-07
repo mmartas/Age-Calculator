@@ -28,6 +28,10 @@ myForm.addEventListener("submit", function(event){
         // inputDateErrorPlace.appendChild(newDateError)
     } else if ([2].includes(Number(inputMonth.value)) && Number(inputDay.value > 29)) {
         alert("Zadejte prosím platné datum.")
+    } else if ([29].includes(Number(inputDay.value)) && Number(inputYear.value) % 4 !== 0) {
+        alert("Zadejte prosím platné datum.")
+    } else if(inputYear.value > actuallYear) {
+        alert("Zadejte prosím platné datum.")
     } else {
         // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
         if(document.getElementById("dateEmptySpace")) {
