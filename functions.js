@@ -16,3 +16,10 @@ function showErrorMessage(placeToText, text, htmlNewErrorPlace, errorMessage) {
     placeToText.classList.add("error-state-style");
     htmlNewErrorPlace.appendChild(errorMessage)
 }
+
+// ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
+function clearNoneValuesPlaces(emptyHTMLspace) {
+    if(emptyHTMLspace) {
+        emptyHTMLspace.remove()
+    }
+}
