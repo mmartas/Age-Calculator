@@ -2,78 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="icon" href="assets/images/processing.png">
   
-  <title>Frontend Mentor | Age calculator app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <title>Profesional Age Calculator</title>
 </head>
 <body>
   <main>
     <div class="card">
+      <!-- (ZAČÁTEK) ALL INPUTS - FORM -->
       <form action="" id="myForm">
+        <!-- INPUT DAY -->
         <div class="oneCard">
           <label for="date" class="askLabel">day</label><br>
-          <input type="number" min="1" max="31" placeholder="DD" class="inputs" name="date" id="inputDate" required>
+          <input type="number" min="1" max="31" placeholder="DD" class="inputs" name="date" id="inputDate">
           <!-- <div id="inputDateErrorPlace"></div> -->
         </div>
         
+        <!-- INPUT MONTH -->
         <div class="oneCard">
           <label for="month" class="askLabel">month</label><br>
-          <input type="number" min="1" max="12" placeholder="MM"  class="inputs" name="month" id="inputMonth" required>
+          <input type="number" min="1" max="12" placeholder="MM"  class="inputs" name="month" id="inputMonth">
         </div>
         
+        <!-- INPUT YEAR -->
         <div class="oneCard">
           <label for="year" class="askLabel">year</label><br>
-          <input type="number" placeholder="YYYY" class="inputs" name="year" id="inputYear" required>
+          <input type="number" placeholder="YYYY" class="inputs" name="year" id="inputYear">
         </div>
         
-
         <input type="image" src="assets/images/icon-arrow.svg" id="sending">
       </form>
+      <!-- (KONEC) ALL INPUTS - FORM -->
       <hr>
-
+      <!-- RESULT - YEAR -->
       <div class="result">
         <div class="empty-result">
           <p id="yearEmptySpace">--</p>
-          <div id="placeYear">
-          </div>
+          <div id="placeYear"></div>
         </div>
         <div class="labelYear">
           <p>years</p>
         </div>
       </div>
 
+      <!-- RESULT - MONTH -->
       <div class="result">
         <div class="empty-result">
           <p id="monthEmptySpace">--</p>
-          <div id="placeMonth">
-          </div>
+          <div id="placeMonth"></div>
         </div>
         <div class="labelMonth">
           <p>months</p>
         </div>
       </div>
 
+      <!-- RESULT - DAY -->
       <div class="result">
         <div class="empty-result">
           <p id="dateEmptySpace">--</p>
-          <div id="placeDate">
-          </div>
+          <div id="placeDate"></div>
         </div>
         <div class="labelDate">
           <p>days</p>
         </div>
       </div>
-
     </div>
-    
   </main>
   <script src="script.js"></script>
 </body>

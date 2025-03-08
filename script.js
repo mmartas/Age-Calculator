@@ -13,6 +13,9 @@ let actuallYear = actuallFullDate.getFullYear();
 let actuallMonth = actuallFullDate.getMonth() + 1;
 let actuallDay = actuallFullDate.getDate();
 
+let inputLabels = document.querySelectorAll(".askLabel");
+let allInputs = document.querySelectorAll(".inputs")
+
 //let inputDateErrorPlace = document.querySelector("#inputDateErrorPlace")
 
 //let newDateError = document.createElement("p")
@@ -21,18 +24,56 @@ myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
     event.preventDefault()
 
+    // měsíce které mají jen 30 dní
     if([4, 6, 9, 11].includes(Number(inputMonth.value)) && Number(inputDay.value > 30)) {
-        alert("Zadejte prosím platné datum.")
-        // inputDay.classList.add("error-border");
+        inputLabels.forEach(function(label){
+            label.classList.add("red-font-color");
+        })
+        allInputs.forEach(function(oneInput){
+            oneInput.classList.add("error-border");
+        })
         // newDateError.textContent = "Enter a valid date"
         // inputDateErrorPlace.appendChild(newDateError)
+    // únor nemůže mít více jak 29 dní
     } else if ([2].includes(Number(inputMonth.value)) && Number(inputDay.value > 29)) {
-        alert("Zadejte prosím platné datum.")
+        inputLabels.forEach(function(label){
+            label.classList.add("red-font-color");
+        })
+        allInputs.forEach(function(oneInput){
+            oneInput.classList.add("error-border");
+        })
+    // ošetření toho, že únor má 29 dní jednou za 4 roky
     } else if ([29].includes(Number(inputDay.value)) && Number(inputYear.value) % 4 !== 0) {
-        alert("Zadejte prosím platné datum.")
-    } else if(inputYear.value > actuallYear) {
-        alert("Zadejte prosím platné datum.")
+        inputLabels.forEach(function(label){
+            label.classList.add("red-font-color");
+        })
+        allInputs.forEach(function(oneInput){
+            oneInput.classList.add("error-border");
+        })
+    // ošetření, aby nešli psát budoucí datumy
+    } else if(inputYear.value > actuallYear || (Number(inputYear.value) === actuallYear && Number(inputMonth.value) > actuallMonth) || (Number(inputYear.value) === actuallYear && Number(inputMonth.value) === actuallMonth && Number(inputDay.value) > actuallDay)) {
+        inputLabels.forEach(function(label){
+            label.classList.add("red-font-color");
+        })
+        allInputs.forEach(function(oneInput){
+            oneInput.classList.add("error-border");
+        })
+    // prázdný vstup není povolen
+    } else if(inputDay.value === "" || inputMonth.value === "" || inputYear.value === "") {
+        allInputs.forEach(function(oneInput){
+            if(oneInput.value === "") {
+                oneInput.classList.add("error-border")
+            }
+        })
+
     } else {
+        inputLabels.forEach(function(label){
+            label.classList.remove("red-font-color");
+        })
+        allInputs.forEach(function(oneInput){
+            oneInput.classList.remove("error-border");
+        })
+
         // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
         if(document.getElementById("dateEmptySpace")) {
             let noneValueDay = document.querySelector("#dateEmptySpace")
