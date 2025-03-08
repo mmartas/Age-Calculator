@@ -63,13 +63,19 @@ myForm.addEventListener("submit", function(event){
         allInputs.forEach(function(oneInput){
             if(oneInput.value === "") {
                 oneInput.classList.add("error-border")
+
+                let matchingLabel = document.querySelector(`label[for='${oneInput.id}']`);
+                if(matchingLabel) {
+                    matchingLabel.classList.add("red-font-color");
+                }
             }
         })
 
         showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
         showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
         showErrorMessage(newYearError, "Enter a valid year", inputYearErrorPlace, newYearError)
-
+        inputLabels.forEach(label => label.classList.add("red-font-color"))
+        
     } else {
         // ODSTRANĚNÍ ERRORU Z PŘEDEŠLÉHO HLEDÁNÍ
         newDateError.remove()
