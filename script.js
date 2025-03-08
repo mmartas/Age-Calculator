@@ -24,6 +24,11 @@ let newDateError = document.createElement("p")
 let newMonthError = document.createElement("p")
 let newYearError = document.createElement("p")
 
+let noneValueDay = document.querySelector("#dateEmptySpace")
+let noneValueMonth = document.querySelector("#monthEmptySpace")
+let noneValueYear = document.querySelector("#yearEmptySpace")
+
+
 myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
     event.preventDefault()
@@ -33,46 +38,25 @@ myForm.addEventListener("submit", function(event){
         highlightErrors()
         showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
         showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
-        
+
     // únor nemůže mít více jak 29 dní
     } else if ([2].includes(Number(inputMonth.value)) && Number(inputDay.value > 29)) {
         highlightErrors()
-
-        newDateError.textContent = "Enter a valid day"
-        inputDateErrorPlace.appendChild(newDateError)
-        newDateError.classList.add("error-state-style")
-
-        newMonthError.textContent = "Enter a valid month"
-        inputMonthErrorPlace.appendChild(newMonthError)
-        newMonthError.classList.add("error-state-style")
+        showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
+        showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
 
     // ošetření toho, že únor má 29 dní jednou za 4 roky
     } else if ([29].includes(Number(inputDay.value)) && Number(inputYear.value) % 4 !== 0) {
         highlightErrors()
-
-        newDateError.textContent = "Enter a valid day"
-        inputDateErrorPlace.appendChild(newDateError)
-        newDateError.classList.add("error-state-style")
-
-        newMonthError.textContent = "Enter a valid month"
-        inputMonthErrorPlace.appendChild(newMonthError)
-        newMonthError.classList.add("error-state-style")
+        showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
+        showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
 
     // ošetření, aby nešli psát budoucí datumy
     } else if(inputYear.value > actuallYear || (Number(inputYear.value) === actuallYear && Number(inputMonth.value) > actuallMonth) || (Number(inputYear.value) === actuallYear && Number(inputMonth.value) === actuallMonth && Number(inputDay.value) > actuallDay)) {
         highlightErrors()
-
-        newDateError.textContent = "Enter a valid day"
-        inputDateErrorPlace.appendChild(newDateError)
-        newDateError.classList.add("error-state-style")
-
-        newMonthError.textContent = "Enter a valid month"
-        inputMonthErrorPlace.appendChild(newMonthError)
-        newMonthError.classList.add("error-state-style")
-
-        newYearError.textContent = "Enter a valid year"
-        inputYearErrorPlace.appendChild(newYearError)
-        newYearError.classList.add("error-state-style")
+        showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
+        showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
+        showErrorMessage(newYearError, "Enter a valid year", inputYearErrorPlace, newYearError)
 
     // prázdný vstup není povolen
     } else if(inputDay.value === "" || inputMonth.value === "" || inputYear.value === "") {
@@ -82,40 +66,21 @@ myForm.addEventListener("submit", function(event){
             }
         })
 
-        newDateError.textContent = "This field is required"
-        inputDateErrorPlace.appendChild(newDateError)
-        newDateError.classList.add("error-state-style")
-
-        newMonthError.textContent = "This field is required"
-        inputMonthErrorPlace.appendChild(newMonthError)
-        newMonthError.classList.add("error-state-style")
-
-        newYearError.textContent = "This field is required"
-        inputYearErrorPlace.appendChild(newYearError)
-        newYearError.classList.add("error-state-style")
+        showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
+        showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
+        showErrorMessage(newYearError, "Enter a valid year", inputYearErrorPlace, newYearError)
 
     } else {
+        // ODSTRANĚNÍ ERRORU Z PŘEDEŠLÉHO HLEDÁNÍ
         newDateError.remove()
         newMonthError.remove()
         newYearError.remove()
-
         clearErrors()
 
         // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
-        if(document.getElementById("dateEmptySpace")) {
-            let noneValueDay = document.querySelector("#dateEmptySpace")
-            noneValueDay.remove()
-        }
-        
-        if(document.getElementById("monthEmptySpace")) {
-            let noneValueMonth = document.querySelector("#monthEmptySpace")
-            noneValueMonth.remove()
-        }
-        
-        if(document.getElementById("yearEmptySpace")) {
-            let noneValueYear = document.querySelector("#yearEmptySpace")
-            noneValueYear.remove()
-        }
+        clearNoneValuesPlaces(noneValueDay)
+        clearNoneValuesPlaces(noneValueMonth)
+        clearNoneValuesPlaces(noneValueYear)
        
         // VÝPOČET ZBÝVAJÍCH LET, MĚSÍCŮ A DNŮ
         let searchedYear = actuallYear - Number(inputYear.value)
