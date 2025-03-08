@@ -17,19 +17,21 @@
         <div class="oneCard">
           <label for="date" class="askLabel">day</label><br>
           <input type="number" min="1" max="31" placeholder="DD" class="inputs" name="date" id="inputDate">
-          <!-- <div id="inputDateErrorPlace"></div> -->
+          <div id="inputDateErrorPlace"></div>
         </div>
         
         <!-- INPUT MONTH -->
         <div class="oneCard">
           <label for="month" class="askLabel">month</label><br>
           <input type="number" min="1" max="12" placeholder="MM"  class="inputs" name="month" id="inputMonth">
+          <div id="inputMonthErrorPlace"></div>
         </div>
         
         <!-- INPUT YEAR -->
         <div class="oneCard">
           <label for="year" class="askLabel">year</label><br>
           <input type="number" placeholder="YYYY" class="inputs" name="year" id="inputYear">
+          <div id="inputYearErrorPlace"></div>
         </div>
         
         <input type="image" src="assets/images/icon-arrow.svg" id="sending">
@@ -71,5 +73,6 @@
     </div>
   </main>
   <script src="script.js"></script>
+  <script src="functions.js"></script>
 </body>
 </html>

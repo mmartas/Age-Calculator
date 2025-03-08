@@ -1,5 +1,8 @@
 let myForm = document.querySelector("#myForm")
 
+let inputLabels = document.querySelectorAll(".askLabel");
+
+let allInputs = document.querySelectorAll(".inputs")
 let inputDay = document.querySelector("#inputDate")
 let inputMonth = document.querySelector("#inputMonth")
 let inputYear = document.querySelector("#inputYear")
@@ -13,12 +16,13 @@ let actuallYear = actuallFullDate.getFullYear();
 let actuallMonth = actuallFullDate.getMonth() + 1;
 let actuallDay = actuallFullDate.getDate();
 
-let inputLabels = document.querySelectorAll(".askLabel");
-let allInputs = document.querySelectorAll(".inputs")
+let inputDateErrorPlace = document.querySelector("#inputDateErrorPlace")
+let inputMonthErrorPlace = document.querySelector("#inputMonthErrorPlace")
+let inputYearErrorPlace = document.querySelector("#inputYearErrorPlace")
 
-//let inputDateErrorPlace = document.querySelector("#inputDateErrorPlace")
-
-//let newDateError = document.createElement("p")
+let newDateError = document.createElement("p")
+let newMonthError = document.createElement("p")
+let newYearError = document.createElement("p")
 
 myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
@@ -26,38 +30,50 @@ myForm.addEventListener("submit", function(event){
 
     // měsíce které mají jen 30 dní
     if([4, 6, 9, 11].includes(Number(inputMonth.value)) && Number(inputDay.value > 30)) {
-        inputLabels.forEach(function(label){
-            label.classList.add("red-font-color");
-        })
-        allInputs.forEach(function(oneInput){
-            oneInput.classList.add("error-border");
-        })
-        // newDateError.textContent = "Enter a valid date"
-        // inputDateErrorPlace.appendChild(newDateError)
+        highlightErrors()
+        showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
+        showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
+        
     // únor nemůže mít více jak 29 dní
     } else if ([2].includes(Number(inputMonth.value)) && Number(inputDay.value > 29)) {
-        inputLabels.forEach(function(label){
-            label.classList.add("red-font-color");
-        })
-        allInputs.forEach(function(oneInput){
-            oneInput.classList.add("error-border");
-        })
+        highlightErrors()
+
+        newDateError.textContent = "Enter a valid day"
+        inputDateErrorPlace.appendChild(newDateError)
+        newDateError.classList.add("error-state-style")
+
+        newMonthError.textContent = "Enter a valid month"
+        inputMonthErrorPlace.appendChild(newMonthError)
+        newMonthError.classList.add("error-state-style")
+
     // ošetření toho, že únor má 29 dní jednou za 4 roky
     } else if ([29].includes(Number(inputDay.value)) && Number(inputYear.value) % 4 !== 0) {
-        inputLabels.forEach(function(label){
-            label.classList.add("red-font-color");
-        })
-        allInputs.forEach(function(oneInput){
-            oneInput.classList.add("error-border");
-        })
+        highlightErrors()
+
+        newDateError.textContent = "Enter a valid day"
+        inputDateErrorPlace.appendChild(newDateError)
+        newDateError.classList.add("error-state-style")
+
+        newMonthError.textContent = "Enter a valid month"
+        inputMonthErrorPlace.appendChild(newMonthError)
+        newMonthError.classList.add("error-state-style")
+
     // ošetření, aby nešli psát budoucí datumy
     } else if(inputYear.value > actuallYear || (Number(inputYear.value) === actuallYear && Number(inputMonth.value) > actuallMonth) || (Number(inputYear.value) === actuallYear && Number(inputMonth.value) === actuallMonth && Number(inputDay.value) > actuallDay)) {
-        inputLabels.forEach(function(label){
-            label.classList.add("red-font-color");
-        })
-        allInputs.forEach(function(oneInput){
-            oneInput.classList.add("error-border");
-        })
+        highlightErrors()
+
+        newDateError.textContent = "Enter a valid day"
+        inputDateErrorPlace.appendChild(newDateError)
+        newDateError.classList.add("error-state-style")
+
+        newMonthError.textContent = "Enter a valid month"
+        inputMonthErrorPlace.appendChild(newMonthError)
+        newMonthError.classList.add("error-state-style")
+
+        newYearError.textContent = "Enter a valid year"
+        inputYearErrorPlace.appendChild(newYearError)
+        newYearError.classList.add("error-state-style")
+
     // prázdný vstup není povolen
     } else if(inputDay.value === "" || inputMonth.value === "" || inputYear.value === "") {
         allInputs.forEach(function(oneInput){
@@ -66,13 +82,24 @@ myForm.addEventListener("submit", function(event){
             }
         })
 
+        newDateError.textContent = "This field is required"
+        inputDateErrorPlace.appendChild(newDateError)
+        newDateError.classList.add("error-state-style")
+
+        newMonthError.textContent = "This field is required"
+        inputMonthErrorPlace.appendChild(newMonthError)
+        newMonthError.classList.add("error-state-style")
+
+        newYearError.textContent = "This field is required"
+        inputYearErrorPlace.appendChild(newYearError)
+        newYearError.classList.add("error-state-style")
+
     } else {
-        inputLabels.forEach(function(label){
-            label.classList.remove("red-font-color");
-        })
-        allInputs.forEach(function(oneInput){
-            oneInput.classList.remove("error-border");
-        })
+        newDateError.remove()
+        newMonthError.remove()
+        newYearError.remove()
+
+        clearErrors()
 
         // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
         if(document.getElementById("dateEmptySpace")) {

@@ -115,3 +115,10 @@ hr {
 .red-font-color {
     color: var(--light-red);
 }
+
+.error-state-style {
+    margin: 0;
+    color: var(--light-red);
+    font-style: italic;
+    font-size: 12px;
+}
