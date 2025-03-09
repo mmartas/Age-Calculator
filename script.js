@@ -1,7 +1,6 @@
 let myForm = document.querySelector("#myForm")
 
 let inputLabels = document.querySelectorAll(".askLabel");
-//let errorMessages = document.querySelectorAll(".error-state-style")
 
 let allInputs = document.querySelectorAll(".inputs")
 let inputDay = document.querySelector("#inputDate")
@@ -34,7 +33,6 @@ let sendingButton = document.querySelector("#sending")
 myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
     event.preventDefault()
-
     // měsíce které mají jen 30 dní
     if([4, 6, 9, 11].includes(Number(inputMonth.value)) && Number(inputDay.value > 30)) {
         highlightErrors()
@@ -90,7 +88,6 @@ myForm.addEventListener("submit", function(event){
         })
     } else {
         sendingButton.classList.toggle("rotate")
-
         // ODSTRANĚNÍ ERRORU Z PŘEDEŠLÉHO HLEDÁNÍ
         clearErrorMessage(newDateError)
         clearErrorMessage(newMonthError)
@@ -138,6 +135,5 @@ myForm.addEventListener("submit", function(event){
         allInputs.forEach(function(oneInput){
             oneInput.value = ""
         })
-        
     }
 })
