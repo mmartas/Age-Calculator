@@ -122,3 +122,8 @@ hr {
     font-style: italic;
     font-size: 12px;
 }
+
+.rotate {
+    transition: transform 0.5s ease-in-out;
+    transform: rotate(360deg);
+}

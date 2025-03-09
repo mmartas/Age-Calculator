@@ -29,7 +29,8 @@ let noneValueDay = document.querySelector("#dateEmptySpace")
 let noneValueMonth = document.querySelector("#monthEmptySpace")
 let noneValueYear = document.querySelector("#yearEmptySpace")
 
-console.log(noneValueDay)
+let sendingButton = document.querySelector("#sending")
+
 myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
     event.preventDefault()
@@ -88,8 +89,12 @@ myForm.addEventListener("submit", function(event){
             }
         })
     } else {
+        sendingButton.classList.toggle("rotate")
+
         // ODSTRANĚNÍ ERRORU Z PŘEDEŠLÉHO HLEDÁNÍ
-        [newDateError, newMonthError, newYearError].forEach(clearErrorMessage);
+        clearErrorMessage(newDateError)
+        clearErrorMessage(newMonthError)
+        clearErrorMessage(newYearError)
         clearErrors()
 
         // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
@@ -133,5 +138,6 @@ myForm.addEventListener("submit", function(event){
         allInputs.forEach(function(oneInput){
             oneInput.value = ""
         })
+        
     }
 })
