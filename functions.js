@@ -17,9 +17,25 @@ function showErrorMessage(placeToText, text, htmlNewErrorPlace, errorMessage) {
     htmlNewErrorPlace.appendChild(errorMessage)
 }
 
+// SMAZÁNÍ ERROR ZPRÁV U INPUTŮ
+function clearErrorMessage(inputType){
+    inputType.remove()
+}
+
 // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
 function clearNoneValuesPlaces(emptyHTMLspace) {
     if(emptyHTMLspace) {
         emptyHTMLspace.remove()
     }
 }
+
+// PŘIDÁNÍ HODNOT DO ODSTAVCE
+function addedValuesToParagraph(paragraph, value){
+    paragraph.textContent = value
+}
+
+// PŘIDÁNÍ ODSTAVCE NA STRÁNKU
+function addedParagraphToHTML(place, value) {
+    document.querySelector(place).appendChild(value)
+}
+

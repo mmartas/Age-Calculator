@@ -1,6 +1,7 @@
 let myForm = document.querySelector("#myForm")
 
 let inputLabels = document.querySelectorAll(".askLabel");
+//let errorMessages = document.querySelectorAll(".error-state-style")
 
 let allInputs = document.querySelectorAll(".inputs")
 let inputDay = document.querySelector("#inputDate")
@@ -28,7 +29,7 @@ let noneValueDay = document.querySelector("#dateEmptySpace")
 let noneValueMonth = document.querySelector("#monthEmptySpace")
 let noneValueYear = document.querySelector("#yearEmptySpace")
 
-
+console.log(noneValueDay)
 myForm.addEventListener("submit", function(event){
     // ZABRÁNĚNÍ REFRESHOVÁNÍ STRÁNKY
     event.preventDefault()
@@ -60,27 +61,35 @@ myForm.addEventListener("submit", function(event){
 
     // prázdný vstup není povolen
     } else if(inputDay.value === "" || inputMonth.value === "" || inputYear.value === "") {
+        clearErrors()
         allInputs.forEach(function(oneInput){
+            if(oneInput.value !== ""){
+                if(oneInput.id === "inputDate"){
+                    clearErrorMessage(newDateError)
+                } else if(oneInput.id === "inputMonth"){
+                    clearErrorMessage(newMonthError)
+                } else {
+                    clearErrorMessage(newYearError)
+                }
+            }
             if(oneInput.value === "") {
                 oneInput.classList.add("error-border")
-
-                let matchingLabel = document.querySelector(`label[for='${oneInput.id}']`);
+                let matchingLabel = document.querySelector(`label[for='${oneInput.id}']`)
                 if(matchingLabel) {
                     matchingLabel.classList.add("red-font-color");
                 }
+                if(oneInput.id === "inputDate") {
+                    showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
+                } else if(oneInput.id === "inputMonth") {
+                    showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
+                } else {
+                    showErrorMessage(newYearError, "Enter a valid year", inputYearErrorPlace, newYearError)
+                }
             }
         })
-
-        showErrorMessage(newDateError, "Enter a valid day", inputDateErrorPlace, newDateError)
-        showErrorMessage(newMonthError, "Enter a valid month", inputMonthErrorPlace, newMonthError)
-        showErrorMessage(newYearError, "Enter a valid year", inputYearErrorPlace, newYearError)
-        inputLabels.forEach(label => label.classList.add("red-font-color"))
-        
     } else {
         // ODSTRANĚNÍ ERRORU Z PŘEDEŠLÉHO HLEDÁNÍ
-        newDateError.remove()
-        newMonthError.remove()
-        newYearError.remove()
+        [newDateError, newMonthError, newYearError].forEach(clearErrorMessage);
         clearErrors()
 
         // ODSTRAŇOVÁNÍ ČÁREK(PRÁZDNÝCH HODNOT)
@@ -111,18 +120,18 @@ myForm.addEventListener("submit", function(event){
         }
     
         // NAPLNĚNÍ NOVÉHO ODSTAVCE HODNOTAMI
-        newDayValue.textContent = searchedDay
-        newMonthValue.textContent = searchedMonth
-        newYearValue.textContent = searchedYear
+        addedValuesToParagraph(newDayValue, searchedDay)
+        addedValuesToParagraph(newMonthValue, searchedMonth)
+        addedValuesToParagraph(newYearValue, searchedYear)
     
         // VYPSÁNÍ NOVÝCH HODNOT VE STRÁNCE
-        let newDayValuePlace = document.querySelector("#placeDate").appendChild(newDayValue);
-        let newMonthValuePlace = document.querySelector("#placeMonth").appendChild(newMonthValue);
-        let newYearValuePlace = document.querySelector("#placeYear").appendChild(newYearValue)
+        addedParagraphToHTML("#placeDate", newDayValue)
+        addedParagraphToHTML("#placeMonth", newMonthValue)
+        addedParagraphToHTML("#placeYear", newYearValue)
     
         // SMAZÁNÍ ČÍSEL Z FORMULÁŘE
-        inputDay.value = ""
-        inputMonth.value = ""
-        inputYear.value = ""
+        allInputs.forEach(function(oneInput){
+            oneInput.value = ""
+        })
     }
 })
