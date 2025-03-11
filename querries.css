@@ -1,0 +1,21 @@
+@media only screen and (max-width: 700px) {
+    .card {
+        width: 480px;
+        box-sizing: border-box;
+    }
+
+    #sending {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 125px;
+    }
+
+    hr {
+        width: 100%;
+        margin: 50px 0;
+    }
+
+    #myForm {
+        justify-content: space-between;
+    }
+}
