@@ -29,6 +29,19 @@ body, html {
     border-bottom-right-radius: 150px;
 }
 
+/* Informační věty*/
+.informationSentence p{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+.informationSentence:first-child p {
+    margin-top: 0;
+}
+.informationSentence:nth-of-type(2) p {
+    margin-bottom: 0;
+}
+
 /* INPUTY */
 #myForm {
     font-family: "Poppins", sans-serif;
